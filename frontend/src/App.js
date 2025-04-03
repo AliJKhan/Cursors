@@ -13,7 +13,7 @@ const App = () => {
   const cursorPosition = useRef({ x: 0, y: 0 });
 
   const handleJoin = () => {
-    const socket = new WebSocket('ws://localhost:80');
+    const socket = new WebSocket('ws://cursors-1.onrender.com:80');
 
     socket.onopen = () => {
       console.log('Connected to WebSocket');
