@@ -68,18 +68,7 @@ const App = () => {
     setWs(socket);
   };
 
-  const handleMouseMove = (event) => {
-    cursorPosition.current = { x: event.clientX, y: event.clientY };
-    if (ws && userId) {
-      ws.send(
-          JSON.stringify({
-            type: 'cursor',
-            userId,
-            position: cursorPosition.current,
-          })
-      );
-    }
-  };
+
 
   const handleCursorClick = (clickedUserId) => {
     if (ws && userId && clickedUserId !== userId) {
@@ -95,13 +84,26 @@ const App = () => {
   };
 
   useEffect(() => {
+
     if (isConnected) {
+      const handleMouseMove = (event) => {
+        cursorPosition.current = { x: event.clientX, y: event.clientY };
+        if (ws && userId) {
+          ws.send(
+              JSON.stringify({
+                type: 'cursor',
+                userId,
+                position: cursorPosition.current,
+              })
+          );
+        }
+      };
       document.addEventListener('mousemove', handleMouseMove);
       return () => {
         document.removeEventListener('mousemove', handleMouseMove);
       };
     }
-  }, [ws, userId, isConnected, handleMouseMove]);
+  }, [ws, userId, isConnected]);
 
   return (
       <div>
@@ -177,13 +179,13 @@ const App = () => {
           borderRadius: '5px'
         }}>
           {!isConnected && !killed && (
-              <img src={kill} style={{width: 150, height: 150}}/>
+              <img src={kill} alt="fggg" style={{width: 150, height: 150}}/>
           )}
           {killed && (
-              <img src={dead} style={{width: 150, height: 150}}/>
+              <img src={dead} alt="asd" style={{width: 150, height: 150}}/>
           )}
           {isConnected && !killed && (
-              <img src={join} style={{width: 150, height: 150}}/>
+              <img src={join} alt="sdgf" style={{width: 150, height: 150}}/>
           )}
 
 
