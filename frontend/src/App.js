@@ -101,7 +101,7 @@ const App = () => {
         document.removeEventListener('mousemove', handleMouseMove);
       };
     }
-  }, [ws, userId, isConnected]);
+  }, [ws, userId, isConnected, handleMouseMove]);
 
   return (
       <div>
